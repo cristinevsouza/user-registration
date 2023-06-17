@@ -1,8 +1,10 @@
-﻿namespace UserRegistration.Domain.Adress
+﻿namespace UserRegistration.Domain.Address
 {
-	public struct AdressModel
+	public struct AddressModel
 	{
-		public string ZipCode { get; set; }
+        public int Id { get; set; }
+
+        public string ZipCode { get; set; }
 
 		public string State { get; set; }
 

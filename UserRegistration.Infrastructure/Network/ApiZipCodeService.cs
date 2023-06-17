@@ -1,4 +1,4 @@
-﻿using UserRegistration.Domain.Adress;
+﻿using UserRegistration.Domain.Address;
 
 namespace UserRegistration.Infrastructure.Network
 {

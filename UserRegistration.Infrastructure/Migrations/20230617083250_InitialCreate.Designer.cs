@@ -12,7 +12,7 @@ using UserRegistration.Infrastructure.Database;
 namespace UserRegistration.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230617043652_InitialCreate")]
+    [Migration("20230617083250_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace UserRegistration.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("UserRegistration.Infrastructure.Adress.AdressEntity", b =>
+            modelBuilder.Entity("UserRegistration.Infrastructure.Address.AddressEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,40 +33,40 @@ namespace UserRegistration.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Bairro")
+                    b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Cep")
+                    b.Property<string>("Complement")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Cidade")
+                    b.Property<string>("Neighborhood")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Complemento")
+                    b.Property<string>("Number")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Logradouro")
+                    b.Property<string>("Reference")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Numero")
+                    b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Referencia")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("UF")
+                    b.Property<string>("Street")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -87,22 +87,22 @@ namespace UserRegistration.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("DataNascimento")
+                    b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Sobrenome")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Telefone")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -111,7 +111,7 @@ namespace UserRegistration.Infrastructure.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("UserRegistration.Infrastructure.Adress.AdressEntity", b =>
+            modelBuilder.Entity("UserRegistration.Infrastructure.Address.AddressEntity", b =>
                 {
                     b.HasOne("UserRegistration.Infrastructure.User.UserEntity", "User")
                         .WithMany()

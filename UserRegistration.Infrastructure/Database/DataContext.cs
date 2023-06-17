@@ -1,4 +1,4 @@
-﻿using UserRegistration.Infrastructure.Adress;
+﻿using UserRegistration.Infrastructure.Address;
 using UserRegistration.Infrastructure.User;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +15,7 @@ namespace UserRegistration.Infrastructure.Database
 		}
 
         public DbSet<UserEntity> Users { get; set; }
-		public DbSet<AdressEntity> Adresses { get; set; }
+		public DbSet<AddressEntity> Adresses { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder options)
 		{
@@ -30,8 +30,8 @@ namespace UserRegistration.Infrastructure.Database
 			modelBuilder.Entity<UserEntity>().ToTable("Users");
 			modelBuilder.Entity<UserEntity>().HasKey(u => u.Id);
 
-			modelBuilder.Entity<AdressEntity>().ToTable("Adresses");
-			modelBuilder.Entity<AdressEntity>().HasKey(e => e.Id);
+			modelBuilder.Entity<AddressEntity>().ToTable("Adresses");
+			modelBuilder.Entity<AddressEntity>().HasKey(e => e.Id);
 
 			base.OnModelCreating(modelBuilder);
 		}

@@ -1,4 +1,4 @@
-﻿namespace UserRegistration.Domain.Adress
+﻿namespace UserRegistration.Domain.Address
 {
 	public interface IZipCodeService
 	{

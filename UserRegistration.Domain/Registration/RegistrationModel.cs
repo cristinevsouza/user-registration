@@ -1,5 +1,5 @@
 ﻿using UserRegistration.Domain.User;
-using UserRegistration.Domain.Adress;
+using UserRegistration.Domain.Address;
 
 namespace UserRegistration.Domain.Registration
 {
@@ -7,6 +7,6 @@ namespace UserRegistration.Domain.Registration
 	{
 		public UserModel User { get; set; }
 
-        public AdressModel UserAdress { get; set; }
+        public AddressModel UserAdress { get; set; }
 	}
 }

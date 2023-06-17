@@ -3,7 +3,7 @@ namespace UserRegistration.Domain.User
 {
 	public interface IUserRepository
 	{
-		string Add(UserModel user);
+		int Add(UserModel user);
 
 		UserModel GetById(int id);
 

@@ -4,9 +4,16 @@ namespace UserRegistration.Application
 {
 	public class UserService : IUserService
 	{
-		public string Add(UserModel user)
+		readonly IUserRepository _userRepository;
+
+		public UserService(IUserRepository userRepository) 
 		{
-			throw new NotImplementedException();
+			_userRepository = userRepository;
+		}
+
+		public int Add(UserModel user)
+		{
+			return _userRepository.Add(user);
 		}
 
 		public UserModel GetById(int id)

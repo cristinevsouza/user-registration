@@ -1,4 +1,4 @@
-﻿using UserRegistration.Infrastructure.Adress;
+﻿using UserRegistration.Infrastructure.Address;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserRegistration.Infrastructure.User
@@ -9,14 +9,14 @@ namespace UserRegistration.Infrastructure.User
 
 		public string Cpf { get; set; }
 
-		public string Nome { get; set; }
+		public string FirstName { get; set; }
 
-		public string Sobrenome { get; set; }
+		public string LastName { get; set; }
 
-		public DateTime DataNascimento { get; set; }
+		public DateTime DateOfBirth { get; set; }
 
 		public string Email { get; set; }
 
-		public string Telefone { get; set; }
-    }
+		public string PhoneNumber { get; set; }
+	}
 }
