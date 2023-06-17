@@ -23,6 +23,5 @@
 			return State == "AM";
 		}
 	}
+}
 
-}
-}
