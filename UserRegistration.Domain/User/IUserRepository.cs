@@ -3,10 +3,12 @@ namespace UserRegistration.Domain.User
 {
 	public interface IUserRepository
 	{
-		int Add(UserModel user);
+		int AddUser(UserModel user);
 
-		UserModel GetById(int id);
+		UserModel? GetUserById(int id);
 
-		void Update(UserModel user);
+		void UpdateUser(UserModel user);
+
+		List<UserModel> GetAllUsers();
 	}
 }

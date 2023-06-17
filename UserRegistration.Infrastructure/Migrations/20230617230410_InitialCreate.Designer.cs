@@ -12,7 +12,7 @@ using UserRegistration.Infrastructure.Database;
 namespace UserRegistration.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230617083250_InitialCreate")]
+    [Migration("20230617230410_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -72,7 +72,7 @@ namespace UserRegistration.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Adresses", (string)null);
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("UserRegistration.Infrastructure.User.UserEntity", b =>

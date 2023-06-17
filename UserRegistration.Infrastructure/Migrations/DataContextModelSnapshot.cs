@@ -69,7 +69,7 @@ namespace UserRegistration.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Adresses", (string)null);
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("UserRegistration.Infrastructure.User.UserEntity", b =>

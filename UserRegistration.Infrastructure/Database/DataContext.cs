@@ -15,7 +15,7 @@ namespace UserRegistration.Infrastructure.Database
 		}
 
         public DbSet<UserEntity> Users { get; set; }
-		public DbSet<AddressEntity> Adresses { get; set; }
+		public DbSet<AddressEntity> Addresses { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder options)
 		{
@@ -30,7 +30,7 @@ namespace UserRegistration.Infrastructure.Database
 			modelBuilder.Entity<UserEntity>().ToTable("Users");
 			modelBuilder.Entity<UserEntity>().HasKey(u => u.Id);
 
-			modelBuilder.Entity<AddressEntity>().ToTable("Adresses");
+			modelBuilder.Entity<AddressEntity>().ToTable("Addresses");
 			modelBuilder.Entity<AddressEntity>().HasKey(e => e.Id);
 
 			base.OnModelCreating(modelBuilder);

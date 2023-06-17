@@ -11,19 +11,24 @@ namespace UserRegistration.Application
 			_userRepository = userRepository;
 		}
 
-		public int Add(UserModel user)
+		public int AddUser(UserModel user)
 		{
-			return _userRepository.Add(user);
+			return _userRepository.AddUser(user);
 		}
 
-		public UserModel GetById(int id)
+		public UserModel? GetUserById(int id)
 		{
-			throw new NotImplementedException();
+			return _userRepository.GetUserById(id);
 		}
 
-		public void Update(UserModel user)
+		public void UpdateUser(UserModel user)
 		{
-			throw new NotImplementedException();
+			_userRepository.UpdateUser(user);
+		}
+
+		public List<UserModel> GetAllUsers()
+		{
+			return _userRepository.GetAllUsers();
 		}
 	}
 }

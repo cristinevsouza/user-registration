@@ -1,4 +1,5 @@
-﻿using UserRegistration.Domain.User;
+﻿using Microsoft.EntityFrameworkCore;
+using UserRegistration.Domain.User;
 using UserRegistration.Infrastructure.Database;
 
 namespace UserRegistration.Infrastructure.User
@@ -12,7 +13,7 @@ namespace UserRegistration.Infrastructure.User
 			_context = context;
 		}
 
-		public int Add(UserModel user)
+		public int AddUser(UserModel user)
 		{
 			var entity = new UserEntity
 			{
@@ -23,21 +24,62 @@ namespace UserRegistration.Infrastructure.User
 				Email = user.Email,
 				PhoneNumber = user.PhoneNumber
 			};
-
 			_context.Users.Add(entity);
 			_context.SaveChanges();
 
 			return entity.Id;
 		}
 
-			public UserModel GetById(int id)
+		public UserModel? GetUserById(int id)
 		{
-			throw new NotImplementedException();
+			var entity = _context.Users.FirstOrDefault(x => x.Id == id);
+
+			if (entity == null) return null;
+
+			return new UserModel
+			{
+				Cpf = entity.Cpf,
+				FirstName = entity.FirstName,
+				LastName = entity.LastName,
+				DateOfBirth = entity.DateOfBirth,
+				Email = entity.Email,
+				PhoneNumber = entity.PhoneNumber
+			};
 		}
 
-		public void Update(UserModel user)
+		public void UpdateUser(UserModel user)
 		{
-			throw new NotImplementedException();
+			var userEntity = _context.Users.First(x => x.Id == user.Id);
+
+			userEntity.Cpf = user.Cpf;
+			userEntity.FirstName = user.FirstName;
+			userEntity.LastName = user.LastName;
+			userEntity.DateOfBirth = user.DateOfBirth;
+			userEntity.Email = user.Email;
+			userEntity.PhoneNumber = user.PhoneNumber;
+
+			_context.SaveChanges();
+		}
+
+		public List<UserModel> GetAllUsers()
+		{
+			var usersEntities = _context.Users.ToList();
+
+			var users = new List<UserModel>();
+
+			usersEntities.ForEach(x => users.Add(new UserModel
+			{
+				Id = x.Id,
+				Cpf = x.Cpf,
+				FirstName = x.FirstName,
+				LastName = x.LastName,
+				DateOfBirth = x.DateOfBirth,
+				Email = x.Email,
+				PhoneNumber = x.PhoneNumber
+
+			}));
+
+			return users;
 		}
 	}
 }

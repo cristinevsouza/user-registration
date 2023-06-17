@@ -1,6 +1,6 @@
 ﻿namespace UserRegistration.Domain.User
 {
-	public struct UserModel
+	public class UserModel
 	{
         public int Id { get; set; }
 

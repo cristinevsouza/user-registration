@@ -11,19 +11,25 @@ namespace UserRegistration.Application
 			_addressRepository = addressRepository;
 		}
 
-		public string Add(AddressModel address)
+		public void AddUserAddress(AddressModel address, int userId)
 		{
-			throw new NotImplementedException();
+			_addressRepository.AddUserAddress(address, userId);
 		}
 
-		public AddressModel GetById(int id)
+		public AddressModel GetAddressByUserId(int id)
 		{
-			throw new NotImplementedException();
+			var userAddress = _addressRepository.GetAddressByUserId(id);
+
+			if (userAddress == null)
+			{
+				throw new InvalidOperationException("");
+			}
+			return userAddress.Value;
 		}
 
-		public void Update(AddressModel address)
+		public void UpdateUserAddress(AddressModel address, int userId)
 		{
-			throw new NotImplementedException();
+			_addressRepository.UpdateUserAddress(address, userId);
 		}
 	}
 }

@@ -3,10 +3,10 @@ namespace UserRegistration.Domain.Address
 {
 	public interface IAddressService
 	{
-		string Add(AddressModel address);
+		void AddUserAddress(AddressModel address, int userId);
 
-		AddressModel GetById(int id);
+		AddressModel GetAddressByUserId(int id);
 
-		void Update(AddressModel address);
+		void UpdateUserAddress(AddressModel address, int userId);
 	}
 }
