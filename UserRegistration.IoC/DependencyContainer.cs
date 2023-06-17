@@ -2,7 +2,6 @@
 using UserRegistration.Domain.Registration;
 using UserRegistration.Domain.Address;
 using UserRegistration.Domain.User;
-using UserRegistration.Infrastructure.Registration;
 using UserRegistration.Infrastructure.Address;
 using UserRegistration.Infrastructure.Network;
 using UserRegistration.Infrastructure.User;
@@ -20,7 +19,6 @@ namespace UserRegistration.IoC
 			services.AddScoped<IAddressService, AddressService>();
 			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<IZipCodeService, ApiZipCodeService>();
-			services.AddScoped<IRegistrationRepository, RegistrationRepository>();
 			services.AddScoped<IRegistrationService, RegistrationService>();
 		}
 	}

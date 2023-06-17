@@ -1,4 +1,7 @@
 ﻿
+using Microsoft.Extensions.Configuration;
+using System.ComponentModel.DataAnnotations;
+using System.Net;
 using UserRegistration.Domain.Address;
 using UserRegistration.Domain.Registration;
 using UserRegistration.Domain.User;
@@ -7,30 +10,77 @@ namespace UserRegistration.Application
 {
 	public class RegistrationService : IRegistrationService
 	{
-		private readonly IUserRepository _userRepository;
-		private readonly IAddressRepository _addressRepository;
+		private readonly IUserService _userService;
+		private readonly IAddressService _addressService;
+		private readonly string _ageValidationMessage;
+		private readonly string _stateValidationMessage;
 
-		public RegistrationService(IUserRepository userRepository, IAddressRepository addressRepository) 
+		public RegistrationService(
+			IUserService userService,
+			IAddressService addressService, 
+			IConfiguration configuration) 
 		{
-			_userRepository = userRepository;
-			_addressRepository = addressRepository;
+			_userService = userService;
+			_addressService = addressService;
+			_ageValidationMessage = configuration.GetSection("Messages")["AgeValidation"].ToString();
+			_stateValidationMessage = configuration.GetSection("Messages")["StateValidation"].ToString();
 		}
 
-		public void Add(RegistrationModel registration)
+		public void AddUserRegistration(RegistrationModel registration)
 		{
-			var id = _userRepository.Add(registration.User);
+			RegistrationValidation(registration);
 
-			//if (id > 0) { _addressRepository.Add(registration.UserAdress); }
+			var id = _userService.AddUser(registration.User);
+			_addressService.AddUserAddress(registration.UserAddress, id);
 		}
 
-		public RegistrationModel Get(int userId, int adressId)
+		public RegistrationModel? GetUserRegistration(int userId)
 		{
-			throw new NotImplementedException();
+			var user = _userService.GetUserById(userId);
+
+			if (user != null)
+			{
+				var address = _addressService.GetAddressByUserId(userId);
+				return new RegistrationModel(user, address);
+			}
+
+			return null;
 		}
 
-		public void Update(RegistrationModel registration)
+		public void UpdateUserRegistration(RegistrationModel registration)
 		{
-			throw new NotImplementedException();
+			RegistrationValidation(registration);
+
+			_userService.UpdateUser(registration.User);
+			_addressService.UpdateUserAddress(registration.UserAddress, registration.User.Id);
+		}
+
+		public List<RegistrationModel> GetAllUserRegistrations()
+		{
+			var users = _userService.GetAllUsers();
+			
+			var registrations = new List<RegistrationModel>();
+
+			foreach (var user in users)
+			{
+				var address = _addressService.GetAddressByUserId(user.Id);
+				registrations.Add(new RegistrationModel(user, address));
+			}
+
+			return registrations;
+		}
+
+		private void RegistrationValidation(RegistrationModel registration)
+		{
+			if (!registration.User.IsAdult())
+			{
+				throw new ValidationException(_ageValidationMessage);
+			}
+
+			if (!registration.UserAddress.IsAmazonasState())
+			{
+				throw new ValidationException(_stateValidationMessage);
+			}
 		}
 	}
 }

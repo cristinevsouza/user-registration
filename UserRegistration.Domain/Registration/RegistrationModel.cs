@@ -7,6 +7,12 @@ namespace UserRegistration.Domain.Registration
 	{
 		public UserModel User { get; set; }
 
-        public AddressModel UserAdress { get; set; }
-	}
+        public AddressModel UserAddress { get; set; }
+
+        public RegistrationModel(UserModel user, AddressModel userAddress)
+        {
+            User = user;
+            UserAddress = userAddress;
+        }
+    }
 }

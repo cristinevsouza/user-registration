@@ -3,10 +3,12 @@ namespace UserRegistration.Domain.Registration
 {
     public interface IRegistrationService
     {
-        void Add(RegistrationModel registration);
+        void AddUserRegistration(RegistrationModel registration);
 
-        RegistrationModel Get(int userId, int adressId);
+        RegistrationModel? GetUserRegistration(int userId);
 
-        void Update(RegistrationModel registration);
+        void UpdateUserRegistration(RegistrationModel registration);
+
+        List<RegistrationModel> GetAllUserRegistrations();
 	}
 }

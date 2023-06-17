@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 using UserRegistration.Infrastructure.Database;
 using UserRegistration.IoC;
 
@@ -16,7 +19,11 @@ DependencyContainer.RegisterServices(builder.Services, builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(c =>
+{
+	c.SwaggerDoc("v1", new OpenApiInfo { Title = "User registration", Version = "v1" });
+});
 
 var app = builder.Build();
 
@@ -34,7 +41,11 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();
-	app.UseSwaggerUI();
+
+	app.UseSwaggerUI(c =>
+	{
+		c.SwaggerEndpoint("/swagger/v1/swagger.json", "User Registration V1");
+	});
 }
 
 app.UseHttpsRedirection();
