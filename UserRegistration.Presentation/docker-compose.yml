@@ -1,0 +1,15 @@
+version: "3"
+name: user_registration
+services:
+  database:
+    image: "postgres"
+    container_name: "user_registration_postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/user_registration_postgres/data
+    environment: 
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=user_registration_db
+volumes:
+  db_data:
