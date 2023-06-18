@@ -1,0 +1,9 @@
+  header {    
+    display: flex;
+    justify-content: center;
+    font-size: calc(3px + 2vmin);
+    color: rgb(99, 138, 196);
+    background-color: #282c34;
+    height: 8vh;
+  }
+

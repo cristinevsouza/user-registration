@@ -25,6 +25,16 @@ builder.Services.AddSwaggerGen(c =>
 	c.SwaggerDoc("v1", new OpenApiInfo { Title = "User registration", Version = "v1" });
 });
 
+builder.Services.AddCors(options =>
+{
+	options.AddDefaultPolicy(builder =>
+	{
+		builder.AllowAnyOrigin()
+			   .AllowAnyMethod()
+			   .AllowAnyHeader();
+	});
+});
+
 var app = builder.Build();
 
 //Migrate latest database changes during startup
@@ -36,6 +46,8 @@ using (var scope = app.Services.CreateScope())
 	// Here is the migration executed
 	dbContext.Database.Migrate();
 }
+
+app.UseCors();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

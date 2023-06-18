@@ -1,0 +1,15 @@
+main {
+  padding: 2rem;
+  min-height: 70vh;
+  background-color: #282c34;
+  color: white;
+}
+
+.buttons-main{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttons-main button{
+  margin-left: 1rem;
+}
