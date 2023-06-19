@@ -34,7 +34,7 @@ function UsersList({ handleSelectUser, handleGoBack }) {
           const data = await response.json();
           setUsers(data);
         } else {
-          throw new Error('Failed to fetch data');
+          throw new Error('Failed to fetch users list data');
         }
       } catch (error) {
         console.log(error);

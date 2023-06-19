@@ -5,9 +5,20 @@ import UsersList from './pages/UsersList';
 import InputUserId from './pages/InputUserId';
 
 function Main() {
+  const [showInputUserId, setShowInputUserId] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [showUserList, setShowUserList] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleInputUserId = () => {
+    setShowForm(false);
+    setShowUserList(false);
+    setShowInputUserId(true)
+  };
+
+  const handleGoBack = () => {
+    handleInputUserId();
+  };
 
   const handleSelectUser = (user) => {
     setSelectedUser(user);
@@ -17,22 +28,15 @@ function Main() {
   const handleShowForm = () => {
     setShowForm(true);
     setShowUserList(false);
-  };
-
-  const handleGoBack = () => {
-    setShowForm(false);
-    setShowUserList(false);
-  };
-
-  const handleViewUser = () => {
-    setShowForm(false);
-    setShowUserList(false);
+    setShowInputUserId(false)
   };
 
   const handleShowUserList = () => {
     setShowUserList(true);
+    setShowForm(false);
+    setShowInputUserId(false)
   };
-  console.log(selectedUser)
+
   return (
     <main>
       {showForm ? (
@@ -44,7 +48,7 @@ function Main() {
           handleSelectUser={handleSelectUser}
           handleGoBack={handleGoBack}
         />
-      ) : (
+      ) : showInputUserId ? (
         <>
           <div className='buttons-main'>
             <button onClick={handleShowForm}>
@@ -58,7 +62,8 @@ function Main() {
             <InputUserId handleSelectUser={handleSelectUser} />
           </div>
         </>     
-      )}
+      ) : 
+      <></>}
     </main>
   );
 }

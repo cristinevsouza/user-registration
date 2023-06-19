@@ -11,7 +11,9 @@ function InputUserId({ handleSelectUser }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
     let urlApi= 'https://localhost:44396/api/registration/v1/GetRegistrationByUserId/?userId=';
+
     fetch(urlApi + userId)
       .then(response => response.json())
       .then(data => {

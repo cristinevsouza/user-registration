@@ -29,10 +29,48 @@ function RegistrationForm({ handleGoBack, selectedUser }) {
   }, [selectedUser]);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    if (name === "zipCode") {
+      const cleanedValue = value.replace(/[^0-9]/g, '');
+
+      if (e.target.value?.length !== 8) {
+        return;
+      } else {
+        handleZipCode(value);
+        setFormData({
+          ...formData,
+          zipCode: cleanedValue
+        });
+      }
+    };
+  }
+
+  let registrationBaseUrlApi = 'https://localhost:44396/api/registration/v1/';
+  let addressBaseUrlApi = 'https://localhost:44396/api/address/v1/';
+
+  const handleZipCode = async (e) => {
+    try {
+      const response = await fetch(`${addressBaseUrlApi}GetAddressByZipCode?zipCode=${e}`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.state);
+        formData.state = data.state;
+        formData.city = data.city;
+        formData.neighborhood = data.neighborhood;
+        formData.street = data.street;
+
+        setFormData(formData);
+      } else {
+        throw new Error('Failed to fetch data address');
+      }
+    } catch (error) {
+      console.error('Erro ao localizar os dados de endereço para o formulário:', error);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -61,18 +99,16 @@ function RegistrationForm({ handleGoBack, selectedUser }) {
         }
       };
 
-      let requestedMethod = 'POST';
+      let requestMethod = 'POST';
       let urlSufix = 'AddUserRegistration';
-      let urlApi = 'https://localhost:44396/api/registration/v1/';
 
       if (formData.id > 0) {
-        console.log(formData.id);
-        requestedMethod = 'PUT';
+        requestMethod = 'PUT';
         urlSufix = 'UpdateUserRegistration';
       }
 
-      const response = await fetch(urlApi + urlSufix, {
-        method: requestedMethod,
+      const response = await fetch(registrationBaseUrlApi + urlSufix, {
+        method: requestMethod,
         headers: {
           'Content-Type': 'application/json'
         },
@@ -82,7 +118,7 @@ function RegistrationForm({ handleGoBack, selectedUser }) {
       if (response.ok) {
         setSubmitted(true);
       } else {
-        console.error('Erro ao enviar os dados do formulário');
+        throw new Error('Erro ao enviar os dados do formulário');
       }
     } catch (error) {
       console.error('Erro ao enviar os dados do formulário:', error);
