@@ -20,7 +20,7 @@ namespace UserRegistration.Infrastructure.User
 				Cpf = user.Cpf,
 				FirstName = user.FirstName,
 				LastName = user.LastName,
-				DateOfBirth = user.DateOfBirth,
+				DateOfBirth = user.DateOfBirth.ToUniversalTime(),
 				Email = user.Email,
 				PhoneNumber = user.PhoneNumber
 			};

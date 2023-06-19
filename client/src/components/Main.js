@@ -2,62 +2,60 @@ import React, { useState } from 'react';
 import './Main.css';
 import Form from './pages/Form';
 import UsersList from './pages/UsersList';
-import ViewUser from './pages/ViewUser';
 import InputUserId from './pages/InputUserId';
 
 function Main() {
   const [showForm, setShowForm] = useState(false);
-  const [viewUser, setViewUser] = useState(false);
   const [showUserList, setShowUserList] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleSelectUser = (user) => {
+    setSelectedUser(user);
+    setShowForm(true);
+  };
 
   const handleShowForm = () => {
     setShowForm(true);
-    setViewUser(false);
     setShowUserList(false);
   };
 
   const handleGoBack = () => {
     setShowForm(false);
-    setViewUser(false);
     setShowUserList(false);
   };
 
   const handleViewUser = () => {
     setShowForm(false);
-    setViewUser(true);
     setShowUserList(false);
   };
 
   const handleShowUserList = () => {
     setShowUserList(true);
-    setShowForm(false);
-    setViewUser(false);
   };
-
+  console.log(selectedUser)
   return (
     <main>
       {showForm ? (
-        <Form handleGoBack={handleGoBack} handleViewUser={handleViewUser} />
-      ) : viewUser ? (
-        <ViewUser handleGoBack={handleGoBack} />
+        <Form 
+        selectedUser={selectedUser}
+        handleGoBack={handleGoBack} />
       ) : showUserList ? (
         <UsersList 
-        handleButtonClick={handleShowForm} 
-        handleViewUser={handleViewUser} 
-        handleGoBack={handleGoBack}
-        handleShowForm={handleShowForm}/>
+          handleSelectUser={handleSelectUser}
+          handleGoBack={handleGoBack}
+        />
       ) : (
         <>
           <div className='buttons-main'>
             <button onClick={handleShowForm}>
-              New user
+              New User
             </button>
-            <button onClick={handleShowUserList} handleShowForm={handleShowForm}>
-              List All Users
+            <button onClick={handleShowUserList}>
+              List All
             </button>
           </div>
           <div>
-            <InputUserId handleShowForm={handleShowForm} />
+            <InputUserId handleSelectUser={handleSelectUser} />
           </div>
         </>     
       )}

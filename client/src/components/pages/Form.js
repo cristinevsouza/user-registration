@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Form.css';
 import InputField from '../InputField';
 
-
-function RegistrationForm({handleGoBack}) {
+function RegistrationForm({ handleGoBack, selectedUser }) {
   const [formData, setFormData] = useState({
+    id: 0,
     firstName: '',
     lastName: '',
     cpf: '',
@@ -22,6 +22,12 @@ function RegistrationForm({handleGoBack}) {
   });
   const [submitted, setSubmitted] = useState(false);
 
+  useEffect(() => {
+    if (selectedUser) {
+      setFormData(selectedUser);
+    }
+  }, [selectedUser]);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -34,7 +40,8 @@ function RegistrationForm({handleGoBack}) {
 
     try {
       const requestBody = {
-        user: {
+        userDto: {
+          id: formData.id,
           cpf: formData.cpf,
           firstName: formData.firstName,
           lastName: formData.lastName,
@@ -42,7 +49,7 @@ function RegistrationForm({handleGoBack}) {
           email: formData.email,
           phoneNumber: formData.phoneNumber
         },
-        userAddress: {
+        userAddressDto: {
           zipCode: formData.zipCode,
           state: formData.state,
           city: formData.city,
@@ -54,14 +61,24 @@ function RegistrationForm({handleGoBack}) {
         }
       };
 
-      const response = await fetch('https://localhost:44396/api/registration/v1/AddUserRegistration', {
-        method: 'POST',
+      let requestedMethod = 'POST';
+      let urlSufix = 'AddUserRegistration';
+      let urlApi = 'https://localhost:44396/api/registration/v1/';
+
+      if (formData.id > 0) {
+        console.log(formData.id);
+        requestedMethod = 'PUT';
+        urlSufix = 'UpdateUserRegistration';
+      }
+
+      const response = await fetch(urlApi + urlSufix, {
+        method: requestedMethod,
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(requestBody)
       });
-  
+
       if (response.ok) {
         setSubmitted(true);
       } else {
@@ -71,20 +88,20 @@ function RegistrationForm({handleGoBack}) {
       console.error('Erro ao enviar os dados do formulário:', error);
     }
   };
-  
+
   const formatDate = (date) => {
     if (!date) return '';
-  
+
     const formattedDate = new Date(date).toISOString().split('T')[0];
     return formattedDate;
-  };  
+  };
 
   return (
     <div className="div-form">
       {!submitted ? (
-        <div class="container">
+        <div className="container">
           <form className="registration-form" onSubmit={handleSubmit}>
-            <div className="form-row">           
+            <div className="form-row">
               <InputField
                 label="First name:"
                 id="first-name"
@@ -98,14 +115,14 @@ function RegistrationForm({handleGoBack}) {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
-              />   
+              />
               <InputField
                 label="CPF:"
                 id="cpf"
                 name="cpf"
                 value={formData.cpf}
                 onChange={handleChange}
-              />             
+              />
               <InputField
                 label="Date of Birth:"
                 id="birth-date"
@@ -127,7 +144,7 @@ function RegistrationForm({handleGoBack}) {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-              />    
+              />
               <InputField
                 label="Zip Code:"
                 id="zip-code"
@@ -148,7 +165,7 @@ function RegistrationForm({handleGoBack}) {
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
-              />     
+              />
               <InputField
                 label="Neighborhood:"
                 id="neighborhood"
@@ -169,7 +186,7 @@ function RegistrationForm({handleGoBack}) {
                 name="number"
                 value={formData.number}
                 onChange={handleChange}
-              /> 
+              />
               <InputField
                 label="Complement:"
                 id="complement"
@@ -186,10 +203,10 @@ function RegistrationForm({handleGoBack}) {
               />
             </div>
             <div className="div-button">
-                <button type="submit">Send</button>
-            </div>         
-        </form>
-      </div>
+              <button type="submit">Send</button>
+            </div>
+          </form>
+        </div>
       ) : (
         <div className="success-message">
           <h2>Success!</h2>
@@ -208,7 +225,7 @@ function RegistrationForm({handleGoBack}) {
           <p>Complemento: {formData.complement}</p>
           <p>Referência: {formData.reference}</p>
         </div>
-      )} 
+      )}
       <a href="#" onClick={handleGoBack}>Go Back</a>
     </div>
   );

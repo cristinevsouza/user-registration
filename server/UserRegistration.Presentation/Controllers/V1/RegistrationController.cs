@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserRegistration.Domain.Registration;
+using UserRegistration.Presentation.Dtos;
 
 namespace UserRegistration.Presentation.Controllers.V1
 {
@@ -14,9 +15,9 @@ namespace UserRegistration.Presentation.Controllers.V1
         }
 
         [HttpPost("AddUserRegistration")]
-        public IActionResult AddUserRegistration(RegistrationModel registration)
+        public IActionResult AddUserRegistration(RegistrationDto registrationDto)
         {
-            _registrationService.AddUserRegistration(registration);
+            _registrationService.AddUserRegistration(registrationDto.ToModel());
             return Ok();
         }
 
@@ -28,9 +29,9 @@ namespace UserRegistration.Presentation.Controllers.V1
         }
 
         [HttpPut("UpdateUserRegistration")]
-        public IActionResult UpdateUserRegistration(RegistrationModel registration)
+        public IActionResult UpdateUserRegistration(RegistrationDto registrationDto)
         {
-            _registrationService.UpdateUserRegistration(registration);
+            _registrationService.UpdateUserRegistration(registrationDto.ToModel());
             return Ok();
         }
 
