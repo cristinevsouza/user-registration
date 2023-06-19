@@ -58,7 +58,8 @@ function RegistrationForm({ handleGoBack, selectedUser }) {
       const response = await fetch(`${addressBaseUrlApi}GetAddressByZipCode?zipCode=${e}`);
       if (response.ok) {
         const data = await response.json();
-        console.log(data.state);
+        
+        formData.zipCode = data.zipCode;
         formData.state = data.state;
         formData.city = data.city;
         formData.neighborhood = data.neighborhood;
