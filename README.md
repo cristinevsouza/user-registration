@@ -10,8 +10,13 @@
 
 ``` run docker-compose up -d ``` 
 
+### Para iniciar a página localmente rode os comandos:
+
+``` npm install ```
+``` npm start ```
+
 ## Escopo do projeto a partir do C4 model.
-![User Registration C4 Model Architecture](https://imageup.me/yl4)
+![User Registration C4 Model Architecture](/C4-Software-Architecture.drawio.png)
 
 ## O projeto está em sua primeira versão de desenvolvimento, necessitando ajustes de layout, testes unitários e revisão do código para eventuais refatorações para melhorias.
 
