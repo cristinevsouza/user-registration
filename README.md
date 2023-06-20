@@ -13,7 +13,7 @@
 ## Escopo do projeto a partir do C4 model.
 ![User Registration C4 Model Architecture](https://imageup.me/yl4)
 
-### O projeto está em sua primeira versão de desenvolvimento, necessitando ajustes de layout, testes unitários e revisão do código para eventuais refatorações para melhorias.
+## O projeto está em sua primeira versão de desenvolvimento, necessitando ajustes de layout, testes unitários e revisão do código para eventuais refatorações para melhorias.
 
 
 
