@@ -10,6 +10,11 @@
 
 ``` run docker-compose up -d ``` 
 
+### Para efetivar a primeira migration realize o comando abaixo em "\UserRegistration.Infrasctructure":
+
+``` dotnet ef migrations add InitialCreate ``` 
+
+### Em seguida abra o projeto no Visual Studio e rode a aplicação pelo IIS.
 
 ### Para iniciar a página localmente rode os comandos:
 
