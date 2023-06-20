@@ -1,4 +1,0 @@
-
-
-at directory \UserRegistration.Presentation run: docker-compose up -d
-

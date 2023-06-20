@@ -1,31 +1,35 @@
 .div-input-userId {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-  .div-input-userId form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 3rem 1rem;
-    border-radius: 1rem;
-    background-color: #f5f5f5;
-    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.15);
-    color:black;
-  }
-  
-  .div-input-userId form label {
-    margin-bottom: 10px;
-  }
-  
-  .div-input-userId form input {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .div-input-userId form button {
-    width: 70%;
-    justify-content: center;
-  }
-  
+.div-input-userId form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 1rem;
+  border-radius: 1rem;
+  background-color: #f5f5f5;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.15);
+  color:black;
+}
+
+.div-input-userId form label {
+  margin-bottom: 10px;
+}
+
+.div-input-userId form input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.div-btn-search{
+  display: flex;
+  justify-content: center;    
+}
+
+.div-input-userId form button {
+  width: 70%;
+}
