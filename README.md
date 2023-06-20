@@ -10,7 +10,6 @@
 
 ``` run docker-compose up -d ``` 
 
-<br/>
 
 ### Para iniciar a página localmente rode os comandos:
 
